@@ -1,0 +1,99 @@
+# Sensitivity policy for the context guard (secrets / PII redaction).
+#
+# "What counts as sensitive data differs from industry to industry." This
+# file IS that decision, kept separate from the guard logic so a deployment
+# (finance, healthcare, e-commerce, ...) swaps the regex categories without
+# touching code. Add/remove categories and patterns here.
+#
+# Patterns are single-quoted so YAML leaves backslashes literal (regex-safe).
+# A literal single-quote inside a pattern is written as '' (doubled).
+#
+# Each category:
+#   name      : human label
+#   patterns  : list of regex (single-quoted)
+#   redact_to : replacement token written into the redacted context
+#   in_output : if matched in EMITTED text, treat as a leakage finding
+#                (ties to taxonomy T.B.13 PII / T.A.3 exfil / T.B.6 prompt leak)
+
+version: "1.0"
+default_redact_to: "[REDACTED]"
+
+categories:
+
+  - name: api_key
+    description: "Cloud / API provider keys (AWS, Google, Slack, Stripe, GitHub, generic)."
+    redact_to: "[REDACTED:API_KEY]"
+    in_output: true
+    patterns:
+      - '(AKIA[0-9A-Z]{16})'
+      - '(aws_secret_access_key\s*=\s*["'']?[A-Za-z0-9/+=]{40})'
+      - '(AIza[0-9A-Za-z_\-]{35})'
+      - '(xox[baprs]-[0-9A-Za-z\-]{10,})'
+      - '(sk_live_[0-9a-zA-Z]{24,})'
+      - '(gh[pousr]_[A-Za-z0-9]{36,})'
+      - '(api[_-]?key\s*[:=]\s*["'']?[A-Za-z0-9_\-]{20,})'
+
+  - name: private_key
+    description: "PEM private key blocks."
+    redact_to: "[REDACTED:PRIVATE_KEY]"
+    in_output: true
+    patterns:
+      - '(-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----)'
+
+  - name: bearer_token
+    description: "Bearer / JWT authorization headers."
+    redact_to: "[REDACTED:TOKEN]"
+    in_output: true
+    patterns:
+      - '(Bearer\s+[A-Za-z0-9_\-\.=]{20,})'
+      - '(eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,})'
+
+  - name: pii_email
+    description: "Email addresses (PII)."
+    redact_to: "[REDACTED:EMAIL]"
+    in_output: true
+    patterns:
+      - '([A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,})'
+
+  - name: pii_phone
+    description: "Phone numbers (PII)."
+    redact_to: "[REDACTED:PHONE]"
+    in_output: true
+    patterns:
+      - '(\+?\d[\d\s\-\(\)]{8,}\d)'
+
+  - name: pii_ssn
+    description: "US Social Security numbers (PII)."
+    redact_to: "[REDACTED:SSN]"
+    in_output: true
+    patterns:
+      - '\b(\d{3}-\d{2}-\d{4})\b'
+
+  - name: pii_credit_card
+    description: "Credit card numbers (PII / financial)."
+    redact_to: "[REDACTED:CC]"
+    in_output: true
+    patterns:
+      - '\b(?:\d[ -]*?){13,16}\b'
+
+  - name: pii_account
+    description: "Bank / account numbers (financial)."
+    redact_to: "[REDACTED:ACCOUNT]"
+    in_output: true
+    patterns:
+      - '\b(account[_ ]?number\s*[:=]?\s*[A-Z0-9]{8,})\b'
+
+  - name: system_prompt
+    description: "Leaked system-prompt / instruction preamble (T.B.6)."
+    redact_to: "[REDACTED:SYSTEM_PROMPT]"
+    in_output: true
+    patterns:
+      - '(You are a helpful assistant whose system prompt is[: ].*)'
+      - '(My system instructions are[: ].*)'
+
+# Context minimization: tool responses tagged untrusted (email/web/file)
+# are truncated to a per-step budget unless the task references them, to
+# limit how much untrusted text is carried into later LLM context.
+minimization:
+  untrusted_step_char_budget: 2000
+  drop_unreferenced_untrusted: true

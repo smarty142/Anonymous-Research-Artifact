@@ -1,0 +1,56 @@
+{
+  "config": {
+    "source_log": "run_adaptive_fusion_eval_glm.log",
+    "n_attacks": 440,
+    "n_benign": 240,
+    "text_workers": 8,
+    "prices_usd_per_mtok_sept2026": {
+      "glm-4.6": {
+        "in": 0.6,
+        "out": 2.2
+      },
+      "claude-haiku-4-5": {
+        "in": 1.0,
+        "out": 5.0
+      }
+    },
+    "estimates": {
+      "text_input_tokens": "prompt chars / 4 (paper: 'about 513')",
+      "text_output_tokens": 20,
+      "camel_tokens": {
+        "in": 600,
+        "out": 150
+      }
+    }
+  },
+  "measured_from_log": {
+    "text_attacks_s": 912,
+    "text_benign_s": 223,
+    "camel_attack_calls": 1040,
+    "camel_attack_empty": 4,
+    "camel_attack_s": 7791,
+    "camel_benign_calls": 18,
+    "camel_benign_empty": 0,
+    "camel_benign_s": 123
+  },
+  "recomputed": {
+    "mean_guard_prompt_chars_attacks": 2098.3,
+    "mean_guard_prompt_chars_all_680": 2082.7,
+    "mean_guard_prompt_tokens_est": 525,
+    "pattern_ms_per_trajectory": 27.1,
+    "text_s_per_trajectory_8way": 2.07,
+    "text_s_per_call_est": 16.58,
+    "camel_calls_per_trajectory": 2.36,
+    "camel_s_per_trajectory_sequential": 17.71,
+    "camel_s_per_call": 7.49,
+    "camel_benign_calls_per_trajectory": 0.075,
+    "camel_benign_s_per_trajectory": 0.51
+  },
+  "cost_usd_per_1000_attack_trajectories": {
+    "text_glm46": 0.36,
+    "text_claude_haiku45": 0.62,
+    "camel_glm46_est": 1.63,
+    "fused_max": 1.99,
+    "pattern": 0.0
+  }
+}

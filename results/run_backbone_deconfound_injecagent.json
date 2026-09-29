@@ -1,0 +1,109 @@
+{
+  "config": {
+    "model": "google/gemma-4-31b-it",
+    "bench": "injecagent",
+    "n": 510,
+    "n_boot": 2000,
+    "fpr_budget": 0.07,
+    "gateway_calls": 103,
+    "gateway_ok": 103
+  },
+  "provenance_single": {
+    "new_auc": 0.5,
+    "shipped_auc": 0.5028,
+    "auc_diff_new_vs_shipped": {
+      "diff": -0.0028,
+      "ci95": [
+        -0.0212,
+        0.0132
+      ]
+    },
+    "new_tpr": 0.0,
+    "new_fpr": 0.0,
+    "new_fires": 0,
+    "shipped_fires": 20
+  },
+  "fused_triple": {
+    "new_auc": 0.9718,
+    "shipped_auc": 0.9441,
+    "auc_diff_new_vs_shipped": {
+      "diff": 0.0277,
+      "ci95": [
+        0.005,
+        0.0501
+      ]
+    },
+    "new_tpr7": 94.1,
+    "shipped_tpr7": 95.7,
+    "tpr7_diff_new_vs_shipped": {
+      "diff": -0.016,
+      "ci95": [
+        -0.037,
+        0.0
+      ]
+    },
+    "auc_diff_new_vs_text": {
+      "diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "text_plus_provenance": {
+    "new_auc": 0.9718,
+    "shipped_auc": 0.9441,
+    "text_auc": 0.9718,
+    "auc_diff_vs_text": {
+      "diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "new_tpr7": 94.1,
+    "shipped_tpr7": 95.7,
+    "tpr7_diff_vs_text": {
+      "diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "lr_head": {
+    "text_alone": {
+      "mean": 0.9712,
+      "std": 0.0233,
+      "folds": [
+        0.9905427631578947,
+        0.9473684210526315,
+        0.9952182952182952,
+        0.9388773388773389,
+        0.9837837837837838
+      ]
+    },
+    "with_shipped_prov": {
+      "mean": 0.9776,
+      "std": 0.0196,
+      "folds": [
+        0.9995888157894737,
+        0.9473684210526315,
+        0.9912681912681913,
+        0.9623700623700624,
+        0.9875259875259875
+      ]
+    },
+    "with_new_prov": {
+      "mean": 0.9712,
+      "std": 0.0233,
+      "folds": [
+        0.9905427631578947,
+        0.9473684210526315,
+        0.9952182952182952,
+        0.9388773388773389,
+        0.9837837837837838
+      ]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "system_tpr": 92.5,
+  "system_fpr": 67.5,
+  "comparators": {
+    "glm-5.2": {
+      "auc": 0.845,
+      "tpr_at_0.5": 43.6,
+      "fpr_at_0.5": 7.5,
+      "tpr_at_67.5pct_fpr": 88.6
+    },
+    "gpt-4o-mini": {
+      "auc": 0.837,
+      "tpr_at_0.5": 84.3,
+      "fpr_at_0.5": 13.3,
+      "tpr_at_67.5pct_fpr": 85.0
+    },
+    "claude-haiku-4-5": {
+      "auc": 0.924,
+      "tpr_at_0.5": 34.3,
+      "fpr_at_0.5": 0.0,
+      "tpr_at_67.5pct_fpr": 93.9
+    }
+  }
+}

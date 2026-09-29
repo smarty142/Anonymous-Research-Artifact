@@ -1,0 +1,20 @@
+{
+  "injecagent": {
+    "n": 510,
+    "n_mal": 187,
+    "tpr": 4.3,
+    "fpr": 3.7
+  },
+  "agentdojo": {
+    "n": 280,
+    "n_mal": 280,
+    "tpr": 20.7,
+    "fpr": null
+  },
+  "toolcall": {
+    "n": 480,
+    "n_mal": 240,
+    "tpr": 42.5,
+    "fpr": 0.0
+  }
+}

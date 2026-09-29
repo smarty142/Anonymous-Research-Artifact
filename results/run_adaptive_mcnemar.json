@@ -1,0 +1,48 @@
+{
+  "config": {
+    "bench": "adaptive (440 attacks + 240 benign control)",
+    "fpr_budget": 0.07,
+    "threshold": "each system's own 7%-FPR threshold",
+    "semantics": "b = smaller-only catches, c = larger-only"
+  },
+  "systems": {
+    "text": {
+      "auc": 0.7781
+    },
+    "text+provenance": {
+      "auc": 0.7823
+    },
+    "text+provenance+pattern": {
+      "auc": 0.7954
+    }
+  },
+  "comparisons": [
+    {
+      "larger": "text+provenance+pattern",
+      "smaller": "text+provenance",
+      "b": 0,
+      "c": 33,
+      "p_value": 0.0,
+      "threshold_larger": 0.1,
+      "threshold_smaller": 0.1
+    },
+    {
+      "larger": "text+provenance+pattern",
+      "smaller": "text",
+      "b": 0,
+      "c": 37,
+      "p_value": 0.0,
+      "threshold_larger": 0.1,
+      "threshold_smaller": 0.1
+    },
+    {
+      "larger": "text+provenance",
+      "smaller": "text",
+      "b": 0,
+      "c": 4,
+      "p_value": 0.125,
+      "threshold_larger": 0.1,
+      "threshold_smaller": 0.1
+    }
+  ]
+}

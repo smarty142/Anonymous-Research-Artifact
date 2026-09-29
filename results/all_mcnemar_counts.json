@@ -1,0 +1,33 @@
+{
+  "toolcall_det_vs_lg4": {
+    "b": 193,
+    "c": 50,
+    "p": 0.0,
+    "source": "run_lg4_mcnemar.json"
+  },
+  "agentdojo_system_vs_glm-5.2": {
+    "b": 140,
+    "c": 3,
+    "p": 0.0,
+    "source": "run_or_extra_mcnemar.py"
+  },
+  "agentdojo_system_vs_gpt-4o-mini": {
+    "b": 32,
+    "c": 9,
+    "p": 0.0004,
+    "source": "run_or_extra_mcnemar.py"
+  },
+  "agentdojo_system_vs_claude-haiku-4-5": {
+    "b": 165,
+    "c": 2,
+    "p": 0.0,
+    "source": "run_or_extra_mcnemar.py"
+  },
+  "agentdojo_system_vs_lg4": {
+    "b": 66,
+    "c": 2,
+    "p": 3.55e-16,
+    "source": "run_lg4_mcnemar.json"
+  },
+  "note": "All counts verified by 3 independent re-runs and arithmetically consistent with released per-model TPRs (run_or_extra_comparison.json, run_lg4_comparison.json) and the system TPR of 92.5% (259/280)."
+}

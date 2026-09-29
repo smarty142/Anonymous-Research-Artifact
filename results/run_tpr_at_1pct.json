@@ -1,0 +1,140 @@
+{
+  "config": {
+    "bench": "toolcall",
+    "n": 480,
+    "n_boot": 2000,
+    "seed": 0,
+    "fpr_budgets": [
+      0.01,
+      0.07
+    ]
+  },
+  "ablation": {
+    "text": {
+      "auc": 0.8316,
+      "tpr@1pct": 35.4,
+      "tpr@7pct": 35.4
+    },
+    "prov": {
+      "auc": 0.7125,
+      "tpr@1pct": 42.5,
+      "tpr@7pct": 42.5
+    },
+    "pattern": {
+      "auc": 0.6562,
+      "tpr@1pct": 31.2,
+      "tpr@7pct": 31.2
+    },
+    "text+prov": {
+      "auc": 0.8448,
+      "tpr@1pct": 42.5,
+      "tpr@7pct": 42.5
+    },
+    "text+pattern": {
+      "auc": 0.8614,
+      "tpr@1pct": 44.6,
+      "tpr@7pct": 44.6
+    },
+    "prov+pattern": {
+      "auc": 0.7542,
+      "tpr@1pct": 50.8,
+      "tpr@7pct": 50.8
+    },
+    "triple": {
+      "auc": 0.8737,
+      "tpr@1pct": 50.8,
+      "tpr@7pct": 50.8
+    }
+  },
+  "paired_diffs": {
+    "triple_vs_text@1pct": {
+      "auc": {
+        "diff": 0.0421,
+        "ci95": [
+          0.0245,
+          0.061
+        ]
+      },
+      "tpr": {
+        "diff": 0.1542,
+        "ci95": [
+          0.1078,
+          0.2
+        ]
+      }
+    },
+    "textprov_vs_text@1pct": {
+      "auc": {
+        "diff": 0.0132,
+        "ci95": [
+          0.0053,
+          0.0233
+        ]
+      },
+      "tpr": {
+        "diff": 0.0708,
+        "ci95": [
+          0.0392,
+          0.1046
+        ]
+      }
+    },
+    "triple_vs_text@7pct": {
+      "auc": {
+        "diff": 0.0421,
+        "ci95": [
+          0.0245,
+          0.061
+        ]
+      },
+      "tpr": {
+        "diff": 0.1542,
+        "ci95": [
+          0.1078,
+          0.2
+        ]
+      }
+    },
+    "textprov_vs_text@7pct": {
+      "auc": {
+        "diff": 0.0132,
+        "ci95": [
+          0.0053,
+          0.0233
+        ]
+      },
+      "tpr": {
+        "diff": 0.0708,
+        "ci95": [
+          0.0392,
+          0.1046
+        ]
+      }
+    }
+  },
+  "granularity": {
+    "n_distinct_text_scores": 18,
+    "n_benign": 240,
+    "text@1pct": {
+      "threshold": 0.18,
+      "actual_fpr_pct": 0.42,
+      "blocking_tie_value": 0.15,
+      "benign_tied_at_blocker": 29
+    },
+    "text@7pct": {
+      "threshold": 0.18,
+      "actual_fpr_pct": 0.42,
+      "blocking_tie_value": 0.15,
+      "benign_tied_at_blocker": 29
+    },
+    "tpr_identical_across_budgets": {
+      "text": true,
+      "prov": true,
+      "pattern": true,
+      "text+prov": true,
+      "text+pattern": true,
+      "prov+pattern": true,
+      "triple": true
+    }
+  }
+}

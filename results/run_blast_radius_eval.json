@@ -1,0 +1,12 @@
+{
+  "n_attacks": 90,
+  "n_irreversible": 78,
+  "n_read_sensitive": 12,
+  "n_benign": 90,
+  "prevention_irreversible_default_pct": 100.0,
+  "prevention_irreversible_granted_pct": 100.0,
+  "prevention_read_sensitive_pct": 0.0,
+  "prevention_under_output_bypass_pct": 100.0,
+  "false_hitl_default_pct": 100.0,
+  "false_hitl_granted_pct": 100.0
+}
