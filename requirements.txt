@@ -1,0 +1,20 @@
+# Core dependencies for regenerating all tables and figures from the
+# shipped caches (no API calls, no credentials).
+numpy>=1.24
+scikit-learn>=1.3
+matplotlib>=3.8
+
+# Supporting libraries used by the channel/pipeline modules.
+pydantic>=2.5
+PyYAML>=6.0
+jsonschema>=4.20
+regex>=2023.10
+
+# Tests
+pytest>=7.4
+
+# Optional: only needed to RE-SCORE trajectories against live endpoints
+# (all published numbers regenerate from results/cache/ without these):
+# requests>=2.31
+# httpx>=0.25
+# openai>=1.40
