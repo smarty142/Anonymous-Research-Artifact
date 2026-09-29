@@ -1,0 +1,205 @@
+{
+  "A_det_score_distribution": {
+    "n": 510,
+    "n_distinct_values": 1,
+    "fraction_at_mode": 1.0,
+    "mode_value": 0.0,
+    "hist": {
+      "0.0": 510
+    },
+    "auc": 0.5
+  },
+  "B_fusion_rule_reconstruction": {
+    "candidate_aucs_glm46": {
+      "max": 0.7691,
+      "mean": 0.922,
+      "noisy-or": 0.7646,
+      "product": 0.9156
+    },
+    "selected_rule": "max",
+    "published_composition_auc": 0.7691,
+    "agentdojo_gpt4o_composition_auc": 0.9083,
+    "agentdojo_input_filter_alone_auc": 0.968,
+    "agentdojo_published": 0.9083
+  },
+  "B_composition_pairings_injecagent": {
+    "GLM-4.6": {
+      "classifier_alone_auc": 0.9155,
+      "composition_auc": 0.7691,
+      "diff": -0.1464,
+      "diff_ci95": [
+        -0.1861,
+        -0.1039
+      ],
+      "alternative_fusions": {
+        "mean": {
+          "auc": 0.922,
+          "diff": 0.0065,
+          "diff_ci95": [
+            -0.0143,
+            0.0275
+          ]
+        },
+        "product": {
+          "auc": 0.9156,
+          "diff": 0.0002,
+          "diff_ci95": [
+            0.0,
+            0.0005
+          ]
+        },
+        "noisy-or": {
+          "auc": 0.7646,
+          "diff": -0.1509,
+          "diff_ci95": [
+            -0.1916,
+            -0.1084
+          ]
+        }
+      }
+    },
+    "GLM-5.2": {
+      "classifier_alone_auc": 0.9973,
+      "composition_auc": 0.7566,
+      "diff": -0.2407,
+      "diff_ci95": [
+        -0.2813,
+        -0.2006
+      ],
+      "alternative_fusions": {
+        "mean": {
+          "auc": 0.9025,
+          "diff": -0.0949,
+          "diff_ci95": [
+            -0.1221,
+            -0.0698
+          ]
+        },
+        "product": {
+          "auc": 0.9978,
+          "diff": 0.0004,
+          "diff_ci95": [
+            -0.0014,
+            0.0029
+          ]
+        },
+        "noisy-or": {
+          "auc": 0.7546,
+          "diff": -0.2427,
+          "diff_ci95": [
+            -0.2853,
+            -0.2017
+          ]
+        }
+      }
+    },
+    "Claude Haiku 4.5": {
+      "classifier_alone_auc": 0.9718,
+      "composition_auc": 0.7665,
+      "diff": -0.2052,
+      "diff_ci95": [
+        -0.2484,
+        -0.159
+      ],
+      "alternative_fusions": {
+        "mean": {
+          "auc": 0.9466,
+          "diff": -0.0252,
+          "diff_ci95": [
+            -0.0425,
+            -0.006
+          ]
+        },
+        "product": {
+          "auc": 0.9665,
+          "diff": -0.0053,
+          "diff_ci95": [
+            -0.0111,
+            0.0004
+          ]
+        },
+        "noisy-or": {
+          "auc": 0.7796,
+          "diff": -0.1922,
+          "diff_ci95": [
+            -0.2346,
+            -0.1491
+          ]
+        }
+      }
+    },
+    "GPT-4o-mini": {
+      "classifier_alone_auc": 0.895,
+      "composition_auc": 0.743,
+      "diff": -0.152,
+      "diff_ci95": [
+        -0.1913,
+        -0.1138
+      ],
+      "alternative_fusions": {
+        "mean": {
+          "auc": 0.8702,
+          "diff": -0.0248,
+          "diff_ci95": [
+            -0.0496,
+            0.0007
+          ]
+        },
+        "product": {
+          "auc": 0.8757,
+          "diff": -0.0193,
+          "diff_ci95": [
+            -0.0438,
+            0.0058
+          ]
+        },
+        "noisy-or": {
+          "auc": 0.7361,
+          "diff": -0.1589,
+          "diff_ci95": [
+            -0.2009,
+            -0.1178
+          ]
+        }
+      }
+    }
+  },
+  "C_ensemble_recipe": {
+    "bench": "tool-call (n=480: 360 malicious, 120 constructed benign)",
+    "channels": {
+      "text": "Claude Haiku 4.5 continuous score (cached)",
+      "provenance": "full CaMeL hard label (cached), weight w",
+      "pattern": "signature non-conformity score, normalized d/(d+1)"
+    },
+    "fusion": "per-trajectory max over channel scores",
+    "two_channel_w": 0.5,
+    "two_channel_auc_by_w": {
+      "0.5": 0.8448,
+      "0.7": 0.8448,
+      "0.9": 0.8448,
+      "1.0": 0.8448
+    },
+    "three_channel_w": 0.5,
+    "three_channel_auc_by_w": {
+      "0.5": 0.8737,
+      "0.7": 0.8737,
+      "0.9": 0.8737,
+      "1.0": 0.8737
+    }
+  },
+  "C_tpr_at_7pct_fpr": {
+    "claude_alone": 0.3542,
+    "claude_plus_camel": 0.425,
+    "three_channel": 0.5083,
+    "gain_three_minus_claude_pp": 15.4,
+    "gain_three_minus_claude_ci95_pp": [
+      10.8,
+      20.0
+    ],
+    "gain_two_minus_claude_pp": 7.1,
+    "gain_two_minus_claude_ci95_pp": [
+      3.9,
+      10.5
+    ]
+  }
+}

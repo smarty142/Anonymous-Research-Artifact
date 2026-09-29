@@ -1,0 +1,64 @@
+{
+  "bench": "InjecAgent full 510",
+  "n_malicious": 187,
+  "n_benign": 323,
+  "signals": [
+    {
+      "signal": "det-nonconformity",
+      "n": 510,
+      "n_mal": 187,
+      "n_ben": 323,
+      "auc": 0.5,
+      "tpr_at_1pct_fpr": 0.0,
+      "tpr_at_5pct_fpr": 0.0,
+      "tpr_at_10pct_fpr": 0.0,
+      "auc_ci95": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "signal": "gbdt-proba",
+      "n": 510,
+      "n_mal": 187,
+      "n_ben": 323,
+      "auc": 0.5,
+      "tpr_at_1pct_fpr": 0.0,
+      "tpr_at_5pct_fpr": 0.0,
+      "tpr_at_10pct_fpr": 0.0588,
+      "auc_ci95": [
+        0.4484,
+        0.5503
+      ]
+    },
+    {
+      "signal": "embedding-knn",
+      "n": 510,
+      "n_mal": 187,
+      "n_ben": 323,
+      "auc": 0.5013,
+      "tpr_at_1pct_fpr": 0.0267,
+      "tpr_at_5pct_fpr": 0.0642,
+      "tpr_at_10pct_fpr": 0.1123,
+      "auc_ci95": [
+        0.4463,
+        0.5516
+      ]
+    },
+    {
+      "signal": "combined-max",
+      "n": 510,
+      "n_mal": 187,
+      "n_ben": 323,
+      "auc": 0.5044,
+      "tpr_at_1pct_fpr": 0.0,
+      "tpr_at_5pct_fpr": 0.0,
+      "tpr_at_10pct_fpr": 0.0642,
+      "auc_ci95": [
+        0.4535,
+        0.5553
+      ]
+    }
+  ],
+  "honest_fork_rule": "cascade can beat GLM-alone on InjecAgent iff best cheap signal AUC > ~0.6"
+}

@@ -1,0 +1,98 @@
+{
+  "fpr_budget": 0.07,
+  "channel_diversity": {
+    "injecagent": {
+      "n": 510,
+      "rows": {
+        "pattern|provenance": {
+          "q_statistic": 0.9966,
+          "disagreement_rate": 0.0392,
+          "double_fault_rate": 0.351,
+          "spearman_raw_scores": 0.0
+        },
+        "pattern|text": {
+          "q_statistic": 0.6658,
+          "disagreement_rate": 0.3529,
+          "double_fault_rate": 0.0216,
+          "spearman_raw_scores": 0.0
+        },
+        "provenance|text": {
+          "q_statistic": 0.3217,
+          "disagreement_rate": 0.3725,
+          "double_fault_rate": 0.0157,
+          "spearman_raw_scores": -0.0212
+        }
+      }
+    },
+    "toolcall": {
+      "n": 480,
+      "rows": {
+        "pattern|provenance": {
+          "q_statistic": 0.9474,
+          "disagreement_rate": 0.1396,
+          "double_fault_rate": 0.2458,
+          "spearman_raw_scores": 0.5169
+        },
+        "pattern|text": {
+          "q_statistic": 0.9628,
+          "disagreement_rate": 0.1146,
+          "double_fault_rate": 0.2771,
+          "spearman_raw_scores": 0.4267
+        },
+        "provenance|text": {
+          "q_statistic": 1.0,
+          "disagreement_rate": 0.0375,
+          "double_fault_rate": 0.2875,
+          "spearman_raw_scores": 0.6766
+        }
+      }
+    },
+    "agentdojo": {
+      "n": 400,
+      "rows": {
+        "pattern|text": {
+          "q_statistic": 1.0,
+          "disagreement_rate": 0.3675,
+          "double_fault_rate": 0.3325,
+          "spearman_raw_scores": -0.4644
+        }
+      },
+      "note": "provenance channel has no labels for constructed benign"
+    }
+  },
+  "backbone_correlation": {
+    "injecagent": {
+      "n_backbones": 4,
+      "rows": {
+        "claude-haiku-4-5|glm-4.6-guard": 0.6848,
+        "claude-haiku-4-5|glm-5.2": 0.6873,
+        "claude-haiku-4-5|gpt-4o-mini": 0.5832,
+        "glm-4.6-guard|glm-5.2": 0.746,
+        "glm-4.6-guard|gpt-4o-mini": 0.5951,
+        "glm-5.2|gpt-4o-mini": 0.5791
+      }
+    },
+    "toolcall": {
+      "n_backbones": 4,
+      "rows": {
+        "claude-haiku-4-5|glm-4.6-guard": 0.6011,
+        "claude-haiku-4-5|glm-5.2": 0.6697,
+        "claude-haiku-4-5|gpt-4o-mini": 0.6546,
+        "glm-4.6-guard|glm-5.2": 0.6524,
+        "glm-4.6-guard|gpt-4o-mini": 0.7881,
+        "glm-5.2|gpt-4o-mini": 0.6567
+      }
+    },
+    "agentdojo": {
+      "n_backbones": 4,
+      "rows": {
+        "claude-haiku-4-5|glm-4.6-guard": 0.4026,
+        "claude-haiku-4-5|glm-5.2": 0.5883,
+        "claude-haiku-4-5|gpt-4o-mini": 0.4322,
+        "glm-4.6-guard|glm-5.2": 0.276,
+        "glm-4.6-guard|gpt-4o-mini": 0.25,
+        "glm-5.2|gpt-4o-mini": 0.4179
+      }
+    }
+  }
+}

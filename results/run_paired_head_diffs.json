@@ -1,0 +1,81 @@
+{
+  "n_boot": 2000,
+  "comparisons": {
+    "injecagent_lr_oof_vs_text": {
+      "lr_oof_auc": 0.9746,
+      "text_auc": 0.9718,
+      "auc_diff": {
+        "diff": 0.0028,
+        "ci95": [
+          -0.0041,
+          0.0127
+        ]
+      },
+      "tpr7_diff": {
+        "diff": 0.0107,
+        "ci95": [
+          0.0,
+          0.0279
+        ]
+      }
+    },
+    "toolcall_lr_oof_vs_text": {
+      "lr_oof_auc": 0.8695,
+      "text_auc": 0.8316,
+      "auc_diff": {
+        "diff": 0.0379,
+        "ci95": [
+          0.0183,
+          0.0594
+        ]
+      },
+      "tpr7_diff": {
+        "diff": 0.1625,
+        "ci95": [
+          0.1165,
+          0.2288
+        ]
+      }
+    },
+    "transfer_toolcall_to_injecagent_vs_text": {
+      "lr_auc": 0.9766,
+      "text_auc": 0.9718,
+      "auc_diff": {
+        "diff": 0.0049,
+        "ci95": [
+          -0.0031,
+          0.0183
+        ]
+      }
+    },
+    "transfer_injecagent_to_toolcall_vs_text": {
+      "lr_auc": 0.8447,
+      "text_auc": 0.8316,
+      "auc_diff": {
+        "diff": 0.0131,
+        "ci95": [
+          0.0053,
+          0.0232
+        ]
+      }
+    },
+    "toolcall_text_prov_vs_text": {
+      "text_prov_auc": 0.8448,
+      "text_auc": 0.8316,
+      "auc_diff": {
+        "diff": 0.0132,
+        "ci95": [
+          0.0053,
+          0.0233
+        ]
+      },
+      "tpr7_diff": {
+        "diff": 0.0708,
+        "ci95": [
+          0.0392,
+          0.1046
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "benign_n": 120,
+  "attacks_n": 280,
+  "pii_benign_fraction": 0.675,
+  "layers": {
+    "input filter": {
+      "tpr": 30.7,
+      "fpr_benign": 4.2
+    },
+    "context guard": {
+      "tpr": 86.1,
+      "fpr_benign": 67.5
+    },
+    "tool gateway": {
+      "tpr": 9.6,
+      "fpr_benign": 32.5
+    },
+    "det output filter": {
+      "tpr": 10.0,
+      "fpr_benign": 76.7
+    },
+    "GLM-4.6 alone": {
+      "tpr": 20.7,
+      "fpr_benign": 0.0
+    },
+    "FULL-SYSTEM": {
+      "tpr": 92.5,
+      "fpr_benign": 67.5,
+      "precision": 0.762
+    }
+  }
+}

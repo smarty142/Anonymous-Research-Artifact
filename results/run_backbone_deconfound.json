@@ -1,0 +1,109 @@
+{
+  "config": {
+    "model": "google/gemma-4-31b-it",
+    "bench": "toolcall",
+    "n": 480,
+    "n_boot": 2000,
+    "fpr_budget": 0.07,
+    "gateway_calls": 660,
+    "gateway_ok": 659
+  },
+  "provenance_single": {
+    "new_auc": 0.7083,
+    "shipped_auc": 0.7125,
+    "auc_diff_new_vs_shipped": {
+      "diff": -0.0042,
+      "ci95": [
+        -0.0107,
+        0.0
+      ]
+    },
+    "new_tpr": 41.7,
+    "new_fpr": 0.0,
+    "new_fires": 100,
+    "shipped_fires": 102
+  },
+  "fused_triple": {
+    "new_auc": 0.8697,
+    "shipped_auc": 0.8737,
+    "auc_diff_new_vs_shipped": {
+      "diff": -0.004,
+      "ci95": [
+        -0.0109,
+        0.0
+      ]
+    },
+    "new_tpr7": 50.0,
+    "shipped_tpr7": 50.8,
+    "tpr7_diff_new_vs_shipped": {
+      "diff": -0.0083,
+      "ci95": [
+        -0.0214,
+        0.0
+      ]
+    },
+    "auc_diff_new_vs_text": {
+      "diff": 0.0381,
+      "ci95": [
+        0.0216,
+        0.0565
+      ]
+    }
+  },
+  "text_plus_provenance": {
+    "new_auc": 0.8408,
+    "shipped_auc": 0.8448,
+    "text_auc": 0.8316,
+    "auc_diff_vs_text": {
+      "diff": 0.0092,
+      "ci95": [
+        0.0033,
+        0.0174
+      ]
+    },
+    "new_tpr7": 41.7,
+    "shipped_tpr7": 42.5,
+    "tpr7_diff_vs_text": {
+      "diff": 0.0625,
+      "ci95": [
+        0.0327,
+        0.0938
+      ]
+    }
+  },
+  "lr_head": {
+    "text_alone": {
+      "mean": 0.8322,
+      "std": 0.0214,
+      "folds": [
+        0.8294270833333334,
+        0.8250868055555556,
+        0.8546006944444444,
+        0.7973090277777778,
+        0.8546006944444444
+      ]
+    },
+    "with_shipped_prov": {
+      "mean": 0.8751,
+      "std": 0.022,
+      "folds": [
+        0.8528645833333334,
+        0.8624131944444444,
+        0.8993055555555556,
+        0.8567708333333334,
+        0.904296875
+      ]
+    },
+    "with_new_prov": {
+      "mean": 0.8707,
+      "std": 0.0258,
+      "folds": [
+        0.8528645833333334,
+        0.8548177083333334,
+        0.8993055555555556,
+        0.8420138888888888,
+        0.904296875
+      ]
+    }
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "ablation": {
+    "injecagent": {
+      "n_malicious": 187,
+      "n_benign": 323,
+      "rows": {
+        "text": {
+          "auc": 0.9718,
+          "tpr_at_7pct_fpr": 0.9412
+        },
+        "provenance": {
+          "auc": 0.5028,
+          "tpr_at_7pct_fpr": 0.0428
+        },
+        "pattern": {
+          "auc": 0.5,
+          "tpr_at_7pct_fpr": 0.0
+        },
+        "text+provenance": {
+          "auc": 0.9441,
+          "tpr_at_7pct_fpr": 0.9572
+        },
+        "text+pattern": {
+          "auc": 0.9718,
+          "tpr_at_7pct_fpr": 0.9412
+        },
+        "provenance+pattern": {
+          "auc": 0.5028,
+          "tpr_at_7pct_fpr": 0.0428
+        },
+        "text+provenance+pattern": {
+          "auc": 0.9441,
+          "tpr_at_7pct_fpr": 0.9572
+        }
+      },
+      "full_minus_best_single_ci95": [
+        -0.0501,
+        -0.005
+      ],
+      "best_single": {
+        "channel": "text",
+        "auc": 0.9718
+      }
+    },
+    "toolcall": {
+      "n_malicious": 240,
+      "n_benign": 240,
+      "rows": {
+        "text": {
+          "auc": 0.8316,
+          "tpr_at_7pct_fpr": 0.3542
+        },
+        "provenance": {
+          "auc": 0.7125,
+          "tpr_at_7pct_fpr": 0.425
+        },
+        "pattern": {
+          "auc": 0.6562,
+          "tpr_at_7pct_fpr": 0.3125
+        },
+        "text+provenance": {
+          "auc": 0.8448,
+          "tpr_at_7pct_fpr": 0.425
+        },
+        "text+pattern": {
+          "auc": 0.8614,
+          "tpr_at_7pct_fpr": 0.4458
+        },
+        "provenance+pattern": {
+          "auc": 0.7542,
+          "tpr_at_7pct_fpr": 0.5083
+        },
+        "text+provenance+pattern": {
+          "auc": 0.8737,
+          "tpr_at_7pct_fpr": 0.5083
+        }
+      },
+      "full_minus_best_single_ci95": [
+        0.0245,
+        0.061
+      ],
+      "best_single": {
+        "channel": "text",
+        "auc": 0.8316
+      }
+    },
+    "agentdojo": {
+      "n_malicious": 280,
+      "n_benign": 120,
+      "rows": {
+        "text": {
+          "auc": 0.9235,
+          "tpr_at_7pct_fpr": 0.525
+        },
+        "provenance": {
+          "auc": null,
+          "note": "provenance channel has no labels for constructed benign"
+        },
+        "pattern": {
+          "auc": 0.1516,
+          "tpr_at_7pct_fpr": 0.0
+        },
+        "text+provenance": {
+          "auc": null,
+          "note": "provenance channel has no labels for constructed benign"
+        },
+        "text+pattern": {
+          "auc": 0.2366,
+          "tpr_at_7pct_fpr": 0.0
+        },
+        "provenance+pattern": {
+          "auc": null,
+          "note": "provenance channel has no labels for constructed benign"
+        },
+        "text+provenance+pattern": {
+          "auc": null,
+          "note": "provenance channel has no labels for constructed benign"
+        }
+      },
+      "full_minus_best_single_ci95": null,
+      "best_single": {
+        "channel": "text",
+        "auc": 0.9235
+      }
+    }
+  },
+  "lr_fusion": {
+    "toolcall": {
+      "cv_auc": {
+        "mean": 0.8751,
+        "std": 0.022,
+        "folds": [
+          0.8528645833333334,
+          0.8624131944444444,
+          0.8993055555555556,
+          0.8567708333333334,
+          0.904296875
+        ]
+      },
+      "max_fusion_auc": 0.8737,
+      "coefficients": {
+        "text": 1.756,
+        "provenance": 1.4973,
+        "pattern": 1.498
+      }
+    },
+    "injecagent": {
+      "cv_auc": {
+        "mean": 0.9776,
+        "std": 0.0196,
+        "folds": [
+          0.9995888157894737,
+          0.9473684210526315,
+          0.9912681912681913,
+          0.9623700623700624,
+          0.9875259875259875
+        ]
+      },
+      "max_fusion_auc": 0.9441,
+      "coefficients": {
+        "text": 4.0271,
+        "provenance": 0.3106,
+        "pattern": 0.0
+      }
+    }
+  },
+  "transfer": {
+    "toolcall->injecagent": {
+      "lr_auc": 0.9766,
+      "max_fusion_auc": 0.9441,
+      "best_single_auc": 0.9718
+    },
+    "toolcall->agentdojo": {
+      "lr_auc": null,
+      "note": "destination provenance incomplete"
+    },
+    "injecagent->toolcall": {
+      "lr_auc": 0.8447,
+      "max_fusion_auc": 0.8737,
+      "best_single_auc": 0.8316
+    },
+    "injecagent->agentdojo": {
+      "lr_auc": null,
+      "note": "destination provenance incomplete"
+    }
+  }
+}

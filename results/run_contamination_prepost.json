@@ -1,0 +1,66 @@
+{
+  "n": 510,
+  "n_malicious": 187,
+  "n_benign": 323,
+  "note": "pre-fix = benign rows also carry Attacker Instruction as emitted text (the contaminated construction); text channel = GLM-4.6 (z.ai, glm_guard prompt) \u2014 Claude Haiku 4.5 scoring deferred until OpenRouter access is restored; CaMeL pre-fix deferred",
+  "pre": {
+    "text": {
+      "auc": 0.518,
+      "benign_fpr_at_7pct_budget": 0.0031,
+      "tpr_at_7pct_fpr": 0.0107,
+      "benign_fpr_at_0.5": 0.8142
+    },
+    "pattern": {
+      "auc": 0.5,
+      "benign_fpr_at_7pct_budget": 0.0,
+      "tpr_at_7pct_fpr": 0.0,
+      "benign_fpr_at_0.5": 0.0
+    },
+    "text+pattern_max": {
+      "auc": 0.518,
+      "benign_fpr_at_7pct_budget": 0.0031,
+      "tpr_at_7pct_fpr": 0.0107,
+      "benign_fpr_at_0.5": 0.8142
+    }
+  },
+  "post": {
+    "text": {
+      "auc": 0.9155,
+      "benign_fpr_at_7pct_budget": 0.0155,
+      "tpr_at_7pct_fpr": 0.8342,
+      "benign_fpr_at_0.5": 0.0
+    },
+    "pattern": {
+      "auc": 0.5,
+      "benign_fpr_at_7pct_budget": 0.0,
+      "tpr_at_7pct_fpr": 0.0,
+      "benign_fpr_at_0.5": 0.0
+    },
+    "text+pattern_max": {
+      "auc": 0.9155,
+      "benign_fpr_at_7pct_budget": 0.0155,
+      "tpr_at_7pct_fpr": 0.8342,
+      "benign_fpr_at_0.5": 0.0
+    }
+  },
+  "delta_post_minus_pre": {
+    "text": {
+      "auc": 0.3975,
+      "benign_fpr_at_7pct_budget": 0.0124,
+      "tpr_at_7pct_fpr": 0.8235,
+      "benign_fpr_at_0.5": -0.8142
+    },
+    "pattern": {
+      "auc": 0.0,
+      "benign_fpr_at_7pct_budget": 0.0,
+      "tpr_at_7pct_fpr": 0.0,
+      "benign_fpr_at_0.5": 0.0
+    },
+    "text+pattern_max": {
+      "auc": 0.3975,
+      "benign_fpr_at_7pct_budget": 0.0124,
+      "tpr_at_7pct_fpr": 0.8235,
+      "benign_fpr_at_0.5": -0.8142
+    }
+  }
+}

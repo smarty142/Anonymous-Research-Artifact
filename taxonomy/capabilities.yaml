@@ -1,0 +1,107 @@
+# Capability schema for the least-privilege tool gateway.
+#
+# This makes least privilege a FIRST-CLASS, deployment-configurable defense
+# rather than an implementation detail. Every tool the agent may call maps to
+# a privilege tier; each tier carries an enforcement policy. Deployments swap
+# the tool->tier mapping and tier policies to match their own blast-radius
+# budget (the "what is sensitive / what is destructive differs industry to
+# industry" point).
+#
+# Tiers are ordered by blast radius: read < write < network < irreversible <
+# credential < delegate < admin. A session declares the subset of tiers it is
+# willing to grant; any call outside the granted set is denied or escalated.
+
+version: "1.0"
+
+# ---------------------------------------------------------------------------
+# Privilege tiers, lowest blast radius first.
+# ---------------------------------------------------------------------------
+tiers:
+  read:
+    description: "Idempotent, side-effect-free observation. No external state change."
+    examples: ["read_file", "get_email", "list_calendars", "search_docs", "fetch_url", "db_query_select"]
+    policy:
+      confirmation: never
+      sandbox: false
+      credential_scope: none
+  write:
+    description: "Mutates local/reversible state. Recoverable from backups."
+    examples: ["write_file", "update_record", "create_draft", "set_calendar"]
+    policy:
+      confirmation: never            # reversible -> allow, but audited
+      sandbox: true                  # run in restricted workspace
+      credential_scope: none
+  network:
+    description: "Outbound network egress to a non-sink endpoint (fetch, query)."
+    examples: ["http_get", "search_web", "lookup_dns"]
+    policy:
+      confirmation: never
+      sandbox: true
+      credential_scope: none
+      egress_allowlist: true         # destination must be on the allow-list
+  irreversible:
+    description: "Mutates external state in a way that cannot be undone. Highest blast radius."
+    examples: ["send_email", "send_message", "transfer_money", "delete_file",
+               "drop_table", "execute_sql_write", "post_webhook", "deploy", "rollback"]
+    policy:
+      confirmation: human            # ALWAYS human-in-the-loop, regardless of verdict
+      sandbox: false                 # does not execute without explicit approval
+      credential_scope: scoped
+  credential:
+    description: "Reads secrets, keys, or privileged data."
+    examples: ["get_secret", "read_secret", "fetch_credential", "list_secrets",
+               "decrypt", "kms_decrypt"]
+    policy:
+      confirmation: human
+      sandbox: true
+      credential_scope: scoped       # only the named secret the task requires
+  delegate:
+    description: "Invokes another agent / sub-runtime (privilege boundary)."
+    examples: ["delegate", "call_agent", "spawn_subagent"]
+    policy:
+      confirmation: human
+      sandbox: true
+      credential_scope: scoped
+      max_depth: 1                   # no recursive self-delegation (T.A.15)
+  admin:
+    description: "Privileged / system-level operation. Anything with admin/root/elevated semantics."
+    examples: ["shell_exec", "run_command", "manage_users", "grant_access"]
+    policy:
+      confirmation: human
+      sandbox: true
+      credential_scope: scoped
+      safe_subcommand_allowlist: true   # e.g. read-only shell verbs (ls, cat, ...)
+
+# ---------------------------------------------------------------------------
+# Sink args: arguments that, when tainted by untrusted data, are dangerous.
+# (Mirrors pipeline/parse.py and the T.C.* data-flow patterns.)
+# ---------------------------------------------------------------------------
+sink_args:
+  network_sink:   [to, recipient, recipients, cc, bcc, url, uri, host, endpoint, webhook]
+  file_sink:      [path, file, filename, filepath, dest, destination]
+  code_sink:      [command, cmd, query, body, content, template, data]
+  credential_sink: [secret_id, key_id, account, amount, number]
+
+# ---------------------------------------------------------------------------
+# Confirmation / HITL policy overrides.
+# ---------------------------------------------------------------------------
+confirmation:
+  # Any tool call whose tier policy says 'human' is routed to HITL BEFORE
+  # execution, independently of the output-side verdict. This is the core
+  # fail-closed mechanism: even if the output filter (rules + Llama Guard)
+  # is bypassed, an irreversible action still cannot complete without a human.
+  irreversible_tiers: [irreversible, credential, delegate, admin]
+  # Even a read-tier call requires confirmation if it targets a sensitive path.
+  sensitive_path_patterns:
+    - "/etc/"
+    - "/proc/"
+    - "/var/secrets"
+    - "169.254.169.254"      # cloud metadata endpoints (SSRF, T.A.7)
+    - "metadata.google.internal"
+
+# ---------------------------------------------------------------------------
+# Default session grant. A deployment starts the agent with ONLY these tiers;
+# anything else is denied unless explicitly escalated. Default: read + write +
+# network (no irreversible, no credential, no admin without escalation).
+# ---------------------------------------------------------------------------
+default_grant: [read, write, network]
